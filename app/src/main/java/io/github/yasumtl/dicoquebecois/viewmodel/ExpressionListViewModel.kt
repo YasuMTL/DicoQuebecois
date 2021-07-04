@@ -20,13 +20,19 @@ class ExpressionListViewModel(application: Application): AndroidViewModel(applic
         Log.i("ExpressionListViewModel", "ExpressionListViewModel created!")
     }
 
-    private fun loadExpressionList(){
-        try {
+    private fun loadExpressionList()
+    {
+        try
+        {
             expressionListLiveData = repository.fetchExpressions()
-        } catch (e: InvocationTargetException){
+        }
+        catch (e: InvocationTargetException)
+        {
             e.stackTrace
             Log.d("loadExpressionList", e.cause.toString())
-        } catch (e: Exception){
+        }
+        catch (e: Exception)
+        {
             e.stackTrace
         }
     }
