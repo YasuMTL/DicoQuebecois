@@ -1,8 +1,10 @@
 package io.github.yasumtl.dicoquebecois.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
@@ -40,6 +42,17 @@ class MainActivity : AppCompatActivity()
             }
         })
 
+        //onTouchListener
+        listView.onItemClickListener = AdapterView.OnItemClickListener {
+            parent, view, position, id ->
+                val itemText = listView.getItemAtPosition(position) as String
+                val itemIndex = position + 1
+                val meaning = expresFR.get(position)
+                //Toast.makeText(this, "You selected: $itemText at the position $itemIndex", Toast.LENGTH_SHORT).show()
+
+                getMeaning(itemText, itemIndex, meaning)
+            }
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener
         {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -58,5 +71,16 @@ class MainActivity : AppCompatActivity()
                 return false
             }
         })
+    }
+
+    private fun getMeaning(expression:String, indexOfExpression:Int, meaning:String)
+    {
+        val intent = Intent(this, Meaning::class.java).apply {
+            putExtra("index", indexOfExpression)
+            putExtra("expression", expression)
+            putExtra("meaning", meaning)
+        }
+
+        startActivity(intent)
     }
 }

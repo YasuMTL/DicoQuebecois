@@ -1,6 +1,7 @@
 package io.github.yasumtl.dicoquebecois.model
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -38,17 +39,15 @@ class Repository {
 
     fun fetchExpressions(): MutableLiveData<Expression>
     {
-        googleSheet.getAllExpressions().enqueue(object : Callback<Expression>{
-        //googleSheet.getAllExpressions().enqueue(object : Callback<List<Expression>>{
-            //override fun onResponse(call: Call<List<Expression>>, response: Response<List<Expression>>) {
+        googleSheet.getAllExpressions().enqueue(object : Callback<Expression>
+        {
             override fun onResponse(call: Call<Expression>, response: Response<Expression>) {
-                //responseBody = response.body()!!
                 expressionListLiveData.postValue(response.body())
             }
 
-//            override fun onFailure(call: Call<List<Expression>>, t: Throwable) {
             override fun onFailure(call: Call<Expression>, t: Throwable) {
                 Log.d("Retrofit", "something wrong happens...")
+                //Toast.makeText(, "Something wrong happens, try again later.", Toast.LENGTH_SHORT).show()
                 expressionListLiveData.postValue(null)
             }
         })
@@ -57,7 +56,8 @@ class Repository {
     }
 
     //Singleton to instantiate the Repository class
-    companion object Factory {
+    companion object Factory
+    {
         val instance: Repository
             get(){
                 return Repository()
