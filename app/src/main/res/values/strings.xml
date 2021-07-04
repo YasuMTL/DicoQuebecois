@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Dico Quebecois</string>
+    <string name="back">Back</string>
+    <string name="index_of_expression">index of expression</string>
+    <string name="expression">Expression</string>
+    <string name="meaning">meaning</string>
 </resources>

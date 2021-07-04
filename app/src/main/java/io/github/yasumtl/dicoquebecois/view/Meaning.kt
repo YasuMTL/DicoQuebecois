@@ -2,7 +2,6 @@ package io.github.yasumtl.dicoquebecois.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import io.github.yasumtl.dicoquebecois.R
 import kotlinx.android.synthetic.main.activity_meaning.*
 
@@ -15,20 +14,20 @@ class Meaning : AppCompatActivity() {
         setBackButton()
     }
 
-    private fun setTextViews(){
+    private fun setTextViews() {
         val bundle: Bundle? = intent.extras
         indexTV.text = bundle?.getInt("index").toString()
         tvExpressionQc.text = bundle?.getString("expression")
         tvMeaningFr.text = bundle?.getString("meaning")
     }
 
-    private fun setBackButton(){
+    private fun setBackButton() {
         btn_back.setOnClickListener {
-            backToMain(it)
+            backToMain()
         }
     }
 
-    private fun backToMain(view: View){
+    private fun backToMain() {
         finish()
     }
 }
